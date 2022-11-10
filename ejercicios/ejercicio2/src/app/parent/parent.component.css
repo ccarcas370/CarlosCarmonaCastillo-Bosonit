@@ -1,0 +1,9 @@
+
+.cuadro {
+    width: 95%; 
+    height: 500px; 
+    border: 3px solid rgb(38, 17, 196);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    padding: 15px;
+}
