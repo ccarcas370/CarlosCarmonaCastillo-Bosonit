@@ -11,7 +11,6 @@ export class ChildrenComponent implements OnInit {
   message: string = 'message:';
   newMessage: string = '';
   
-
   @Input() messageInChild: string = '';
 
   @Output() eventEmitter = new EventEmitter<string>(); 
@@ -23,20 +22,17 @@ export class ChildrenComponent implements OnInit {
 
   service(): void {
     this.newMessage = 'message: CHILD USING SERVICE';
-    this.message = this.newMessage;
-    this.eventEmitter.emit(this.message);
+    this.eventEmitter.emit(this.newMessage);
   }
 
   property(): void {
     this.newMessage = 'message: CHILD USING INPUT PROPERTY';
-    this.message = this.newMessage;
-    this.eventEmitter.emit(this.message);
+    this.eventEmitter.emit(this.newMessage);
   }
 
   observable() : void {
     this.newMessage = 'message: CHILD USING SUBJECT';
-    this.message = this.newMessage;
-    this.eventEmitter.emit(this.message);
+    this.eventEmitter.emit(this.newMessage);
   }
 
 }
