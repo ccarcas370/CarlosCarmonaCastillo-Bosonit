@@ -1,0 +1,17 @@
+
+<h3 class="m-3">Hello World</h3>
+<h4 class="m-3">Display hide</h4>
+
+<div class="shadow p-3 m-3 bg-body rounded">
+  Tareas
+</div>
+
+<button class="btn btn-primary ms-3"
+        (click)="accion = !accion">
+  {{ accion ? 'Esconder' : 'Enseñar'}}
+</button>
+
+<div class="message m-3" *ngIf="accion">
+  Hello World!
+  <i class="bi bi-globe"></i>
+</div>
