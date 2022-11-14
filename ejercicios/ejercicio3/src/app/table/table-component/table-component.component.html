@@ -1,0 +1,34 @@
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre de usuario</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Suscrito</th>
+      <th scope="col">País</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas; let i = index">
+      <th scope="row">{{ persona.nombre }}</th>
+      <td>{{ persona.email }}</td>
+      <td>
+        <i class="bi bi-check-lg me-2" *ngIf="persona.promociones"></i>
+      </td>
+      <td>{{ persona.pais }}</td>
+      <td>{{ persona.ciudad }}</td>
+      <td>
+        <div>
+          <span class="spanButton" (click)="editar(i)">
+            <i class="bi bi-pencil-fill me-2"></i>
+          </span>
+          <span class="spanButton" (click)="borrar(i)">
+            <i class="bi bi-trash-fill"></i>
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
