@@ -7,24 +7,40 @@
                     <label>Nombre</label>
                     <input type="text"
                     formControlName="nombre">
+                    <span class="form-text text-danger"
+                        *ngIf="controlarError('nombre')">
+                        El campo nombre es obligatorio
+                    </span>
                 </div>
         
                 <div class="row separator">
                     <label>Contraseña</label>
                     <input type="password"
                     formControlName="password">
+                    <span class="form-text text-danger"
+                        *ngIf="controlarError('password')">
+                        El campo es obligatorio
+                    </span>
                 </div>
                 
                 <div class="row separator">
                     <label>Confirmar la contraseña</label>
                     <input type="password"
                     formControlName="password2">
+                    <span class="form-text text-danger"
+                        *ngIf="controlarError('password2')">
+                        El campo es obligatorio
+                    </span>
                 </div>
         
                 <div class="row separator">
                     <label>Correo</label>
                     <input type="email"
                     formControlName="email">
+                    <span class="form-text text-danger"
+                        *ngIf="controlarError('email')">
+                        {{ emailErrorMsg }}
+                    </span>
                 </div>
         
                 <div class="row separator">
@@ -52,10 +68,15 @@
                     <label>Ciudad</label>
                     <input type="text"
                     formControlName="ciudad">
+                    <span class="form-text text-danger"
+                        *ngIf="controlarError('ciudad')">
+                        El campo es obligatorio
+                    </span>
                 </div>
                 <button class="btn btn-primary float-end separator"
                         type="button"
-                        (click)="guardar()">
+                        (click)="guardar()"
+                        [disabled]="!miFormulario.valid">
                     {{ sw ? 'Crear' : 'Actualizar'}}
                 </button>
             </div>

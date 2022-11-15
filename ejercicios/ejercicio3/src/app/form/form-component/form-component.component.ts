@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Pais } from 'src/app/interfaces/interface';
 import { PaisServiceService } from 'src/app/services/pais-service.service';
 import { Persona } from '../../interfaces/interface';
@@ -30,18 +30,21 @@ import { Persona } from '../../interfaces/interface';
 
 export class FormComponentComponent implements OnInit {
 
+  sw: boolean = true;
+  contador: number = 2;
+  emailPattern: string = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}";
+
   miFormulario: FormGroup<Persona | any> = this.fb.group ({
     nombre: ['', Validators.required],
-    password: ['', Validators.required],
+    password: ['',Validators.required ],
     password2: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     promociones: [false],
     pais: ['', Validators.required],
     ciudad: ['', Validators.required]
+  }, {
+    validators: [this.camposIguales('password', 'password2')]
   });
-
-  sw: boolean = true;
-  contador: number = 2;
 
   paises: Pais[] = [];
   persona: Persona = {
@@ -87,6 +90,39 @@ export class FormComponentComponent implements OnInit {
       this.miFormulario.controls['ciudad'].setValue(persona.ciudad);
     }
     this.contador ++;
+  }
+
+  controlarError(campo: string) {
+    return this.miFormulario.controls[campo].touched && this.miFormulario.controls[campo].errors
+  }
+
+  camposIguales(campo1: string, campo2: string) {
+
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+
+      const pass1 = formGroup.get(campo1)?.value;
+      const pass2 = formGroup.get(campo2)?.value;
+
+      if(pass1 !== pass2) { 
+        formGroup.get(campo2)?.setErrors({ noIguales: true });
+        return { noIguales: true };
+      }
+
+      formGroup.get(campo2)?.setErrors(null);
+      return null;
+    }
+
+  }
+
+  get emailErrorMsg(): string {
+
+    const errors = this.miFormulario.get('email')?.errors;
+
+    if(errors?.['required']) {
+      return 'El email es obligatorio';
+    } else if(errors?.['pattern']) {
+      return 'El formato del email no es válido';
+    } return '';
   }
 
 }
