@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, DoCheck, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { Persona } from 'src/app/interfaces/interface';
-import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-table-component',
@@ -11,39 +10,50 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     }
   `]
 })
-export class TableComponentComponent implements OnInit {
+export class TableComponentComponent implements OnChanges {
 
-  personas: Persona[] = [
-    {
-      nombre: 'Carlos',
-      password: '123456',
-      password2: '123456',
-      email: 'test1@test.com',
-      promociones: true,
-      pais: 'España',
-      ciudad: 'Granada',
-    },
-    {
-      nombre: 'PEDRO',
-      password: '123456',
-      password2: '123456',
-      email: 'test2@test.com',
-      promociones: true,
-      pais: 'España',
-      ciudad: 'JAEN',
-    }
-  ]
+  personas: Persona[] = [{
+    nombre: 'Carlos',
+    password: '123456',
+    password2: '123456',
+    email: 'carlos@test.com',
+    promociones: false,
+    pais: 'España',
+    ciudad: 'Granada'
+  }]
 
   @Output() eventEmitter = new EventEmitter<Persona>();
+  @Input() persona: Persona = {
+    nombre: '',
+    password: '',
+    password2: '',
+    email: '',
+    promociones: false,
+    pais: '',
+    ciudad: ''
+  };
+
+  sw: boolean = false;
+  numero: number = 0;
 
   constructor() { }
-
-  ngOnInit(): void {
- 
+  
+  ngOnChanges(): void {
+    if(this.persona.nombre.trim().length > 0 && this.sw !== true) {
+      this.personas.push(this.persona);
+    }
+    if(this.sw) {
+      const numero: number = this.editar(this.numero);
+      this.personas[numero] = this.persona;
+      this.sw = false;
+    }
   }
 
-  editar(i: number) {
+  editar(i: number): number {
     this.eventEmitter.emit(this.personas[i]);
+    this.sw = true;
+    this.numero = i;
+    return this.numero;
   }
 
   borrar(i: number) {

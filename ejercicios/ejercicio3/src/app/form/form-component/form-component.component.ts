@@ -41,6 +41,7 @@ export class FormComponentComponent implements OnInit {
   });
 
   sw: boolean = true;
+
   paises: Pais[] = [];
   persona: Persona = {
     nombre: '',
@@ -55,6 +56,8 @@ export class FormComponentComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private ps: PaisServiceService) { }
 
+
+
   ngOnInit(): void {
     this.ps.getPais()
       .subscribe( pais => this.paises = pais )
@@ -63,15 +66,13 @@ export class FormComponentComponent implements OnInit {
   guardar() {
     if(this.sw === true) {
       this.persona = this.miFormulario.value;
-      console.log('guardar', this.persona);
-      this.miFormulario.reset();
     } else {
       this.persona = this.miFormulario.value;
       this.sw = true;
-      console.log('actualizar', this.persona);
-      this.miFormulario.reset();
-    }
-    
+    }  
+    console.log(this.miFormulario.value, 'antes del reset');
+    this.miFormulario.reset();
+    console.log(this.miFormulario.value, 'despues del reset');
   }
 
   filaSeleccionada(persona: Persona) {
