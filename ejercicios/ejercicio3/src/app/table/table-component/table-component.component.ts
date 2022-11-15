@@ -39,14 +39,18 @@ export class TableComponentComponent implements OnChanges {
   constructor() { }
   
   ngOnChanges(): void {
-    if(this.persona.nombre.trim().length > 0 && this.sw !== true) {
-      this.personas.push(this.persona);
-    }
-    if(this.sw) {
-      const numero: number = this.editar(this.numero);
-      this.personas[numero] = this.persona;
-      this.sw = false;
-    }
+
+    setTimeout( () => {
+      if(this.persona.nombre.trim().length > 0 && this.sw !== true) {
+        this.personas.push(this.persona);
+      }
+      if(this.sw) {
+        const numero: number = this.editar(this.numero);
+        this.personas[numero] = this.persona;
+        this.sw = false;
+      }
+    })
+
   }
 
   editar(i: number): number {

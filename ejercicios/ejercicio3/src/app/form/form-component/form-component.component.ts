@@ -30,17 +30,18 @@ import { Persona } from '../../interfaces/interface';
 
 export class FormComponentComponent implements OnInit {
 
-  miFormulario: FormGroup = this.fb.group ({
+  miFormulario: FormGroup<Persona | any> = this.fb.group ({
     nombre: ['', Validators.required],
     password: ['', Validators.required],
     password2: ['', Validators.required],
     email: ['', Validators.required],
-    promociones: [''],
+    promociones: [false],
     pais: ['', Validators.required],
     ciudad: ['', Validators.required]
   });
 
   sw: boolean = true;
+  contador: number = 2;
 
   paises: Pais[] = [];
   persona: Persona = {
@@ -66,24 +67,26 @@ export class FormComponentComponent implements OnInit {
   guardar() {
     if(this.sw === true) {
       this.persona = this.miFormulario.value;
+      this.miFormulario.reset();
     } else {
       this.persona = this.miFormulario.value;
+      this.miFormulario.reset();
       this.sw = true;
-    }  
-    console.log(this.miFormulario.value, 'antes del reset');
-    this.miFormulario.reset();
-    console.log(this.miFormulario.value, 'despues del reset');
+    }
   }
 
   filaSeleccionada(persona: Persona) {
-    this.sw = false;
-    this.miFormulario.controls['nombre'].setValue(persona.nombre);
-    this.miFormulario.controls['password'].setValue(persona.password);
-    this.miFormulario.controls['password2'].setValue(persona.password2);
-    this.miFormulario.controls['email'].setValue(persona.email);
-    this.miFormulario.controls['promociones'].setValue(persona.promociones);
-    this.miFormulario.controls['pais'].setValue(persona.pais);
-    this.miFormulario.controls['ciudad'].setValue(persona.ciudad);
+    if(this.contador % 2 === 0) {
+      this.sw = false;
+      this.miFormulario.controls['nombre'].setValue(persona.nombre);
+      this.miFormulario.controls['password'].setValue(persona.password);
+      this.miFormulario.controls['password2'].setValue(persona.password2);
+      this.miFormulario.controls['email'].setValue(persona.email);
+      this.miFormulario.controls['promociones'].setValue(persona.promociones);
+      this.miFormulario.controls['pais'].setValue(persona.pais);
+      this.miFormulario.controls['ciudad'].setValue(persona.ciudad);
+    }
+    this.contador ++;
   }
 
 }
