@@ -1,5 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { ComunicacionService } from '../shared/services/comunicacion.service';
 
 @Component({
   selector: 'app-children',
@@ -8,21 +8,24 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ChildrenComponent implements OnInit {
 
-  message: string = 'message:';
+  
+  mensajeServicioAlPadre: string = 'message: CHILD USING SERVICE';
   newMessage: string = '';
   
-  @Input() messageInChild: string = '';
+  @Input() message: string = 'message:';
 
   @Output() eventEmitter = new EventEmitter<string>(); 
 
-  constructor() { }
+  constructor(private mensajeService: ComunicacionService) { 
+    this.mensajeService.mensajeAlPadreObservable
+      .subscribe(mensaje => this.message = mensaje );
+  }
 
   ngOnInit(): void {
   }
 
   service(): void {
-    this.newMessage = 'message: CHILD USING SERVICE';
-    this.eventEmitter.emit(this.newMessage);
+    this.mensajeService.comunicacionHijoPadre(this.mensajeServicioAlPadre);
   }
 
   property(): void {
@@ -31,8 +34,7 @@ export class ChildrenComponent implements OnInit {
   }
 
   observable() : void {
-    this.newMessage = 'message: CHILD USING SUBJECT';
-    this.eventEmitter.emit(this.newMessage);
+    this.mensajeService.mensajeObservableAlPadre();
   }
 
 }

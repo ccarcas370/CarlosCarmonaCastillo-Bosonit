@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunicacionService } from '../shared/services/comunicacion.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-parent',
@@ -8,26 +10,27 @@ import { Component, OnInit } from '@angular/core';
 export class ParentComponent implements OnInit {
 
   message: string = 'message:';
+  mensajeServicioAlHijo: string = 'message: PARENT USING SERVICE';
   newMessage: string = '';
 
-  constructor() { }
+  constructor(private mensajeService: ComunicacionService) { 
+    this.mensajeService.mensajeAlHijoObservable
+      .subscribe(mensaje => this.message = mensaje);
+  }
 
   ngOnInit(): void {
   }
 
-  service(): string {
-    this.newMessage = 'message: PARENT USING SERVICE';
-    return this.newMessage;
+  service() {
+    this.mensajeService.comucicacionPadreHijo(this.mensajeServicioAlHijo);
   }
 
-  property(): string {
+  property() {
     this.newMessage = 'message: PARENT USING INPUT PROPERTY';
-    return this.newMessage;
   }
 
-  observable() : string {
-    this.newMessage = 'message: PARENT USING SUBJECT';
-    return this.newMessage;
+  observable() {
+    this.mensajeService.mensajeObservableAlHijo();
   }
 
   botonSeleccionado(messageChild: string) {
