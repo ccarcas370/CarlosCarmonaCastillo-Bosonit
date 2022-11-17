@@ -49,7 +49,7 @@ export class TableComponentComponent implements OnChanges {
         this.personas[numero] = this.persona;
         this.sw = false;
       }
-    })
+    }, 0)
 
   }
 

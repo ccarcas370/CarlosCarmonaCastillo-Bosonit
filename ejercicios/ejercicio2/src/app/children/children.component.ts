@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewChecked, OnChanges } from '@angular/core';
 import { ComunicacionService } from '../shared/services/comunicacion.service';
 
 @Component({
@@ -6,13 +6,14 @@ import { ComunicacionService } from '../shared/services/comunicacion.service';
   templateUrl: './children.component.html',
   styleUrls: ['./children.component.css']
 })
-export class ChildrenComponent implements OnInit {
+export class ChildrenComponent implements AfterViewChecked, OnChanges {
 
   
   mensajeServicioAlPadre: string = 'message: CHILD USING SERVICE';
+  message: string = 'message:';
   newMessage: string = '';
-  
-  @Input() message: string = 'message:';
+
+  @Input() messageInChild: string = '';
 
   @Output() eventEmitter = new EventEmitter<string>(); 
 
@@ -21,8 +22,14 @@ export class ChildrenComponent implements OnInit {
       .subscribe(mensaje => this.message = mensaje );
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.message = this.messageInChild;
   }
+
+  ngAfterViewChecked(): void {
+      this.message = this.messageInChild;
+  }
+
 
   service(): void {
     this.mensajeService.comunicacionHijoPadre(this.mensajeServicioAlPadre);

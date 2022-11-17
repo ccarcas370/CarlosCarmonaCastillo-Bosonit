@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ComunicacionService } from '../shared/services/comunicacion.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-parent',
@@ -12,6 +11,7 @@ export class ParentComponent implements OnInit {
   message: string = 'message:';
   mensajeServicioAlHijo: string = 'message: PARENT USING SERVICE';
   newMessage: string = '';
+  sw: boolean = true;
 
   constructor(private mensajeService: ComunicacionService) { 
     this.mensajeService.mensajeAlHijoObservable
@@ -27,6 +27,8 @@ export class ParentComponent implements OnInit {
 
   property() {
     this.newMessage = 'message: PARENT USING INPUT PROPERTY';
+    this.sw = true;
+    console.log('uso padre')
   }
 
   observable() {
