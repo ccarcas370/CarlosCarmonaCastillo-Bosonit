@@ -18,7 +18,7 @@ export class TableComponentComponent implements OnChanges {
     password2: '123456',
     email: 'carlos@test.com',
     promociones: false,
-    pais: 'España',
+    pais: 'Spain',
     ciudad: 'Granada'
   }]
 
