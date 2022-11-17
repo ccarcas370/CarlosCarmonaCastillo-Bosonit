@@ -1,0 +1,16 @@
+
+<mat-button-toggle-group (change)="submit($event)">
+    <mat-button-toggle value="ES">España</mat-button-toggle>
+    <mat-button-toggle value="GB">Reino Unido</mat-button-toggle>
+    <mat-button-toggle value="PT">Portugal</mat-button-toggle>
+</mat-button-toggle-group>
+<form>
+    <input matInput name="input" [(ngModel)]="value" (keyup)="buscar()"  placeholder="Buscar...">
+</form>
+
+
+
+<div *ngFor="let item of universidad">
+        {{ item.name | json}}
+</div>
+
