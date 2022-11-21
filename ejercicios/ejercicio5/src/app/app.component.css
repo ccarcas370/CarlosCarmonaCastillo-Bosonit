@@ -1,0 +1,35 @@
+
+ul.semaforo {
+    float:left;
+    position: relative;
+    width: 100px;
+    margin: 50px;
+    padding: 15px;
+    list-style-type: none;
+    background: black;
+}
+
+ul.semaforo li {
+    position:relative;
+    width: 65px;
+    height: 100px;
+    border-radius: 50%;
+    background: lightgrey;
+    margin: 15px 0;
+}
+
+ul.semaforo li.rojo {
+    background-color: red;
+}
+
+ul.semaforo li.amarillo {
+    background-color: yellow;
+}
+
+ul.semaforo li.verde {
+    background-color: green;
+}
+
+.contenedor {
+    display: flex;
+}

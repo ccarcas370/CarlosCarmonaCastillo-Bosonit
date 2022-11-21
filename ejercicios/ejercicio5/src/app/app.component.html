@@ -1,0 +1,18 @@
+
+<div class="row">
+  <ul class="semaforo">
+    <li class="ul.semaforo li.rojo"></li>
+    <li class="ul.semaforo li.amarillo"></li>
+    <li class="ul.semaforo li.verde"></li>
+  </ul>
+  
+  <div class="contenedor m-3">
+    <div>
+      <app-selector-component (colorEnviado)="obtenerColor($event)"></app-selector-component>
+    </div>
+    
+    <div class="mx-3">
+      <app-checkbox-component></app-checkbox-component>
+    </div>
+  </div>
+</div>
