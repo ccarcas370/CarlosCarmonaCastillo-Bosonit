@@ -1,3 +1,4 @@
+import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Universidad } from 'src/app/interfaces/universidad.interface';
 import { BuscadorService } from 'src/app/services/buscador.service';
@@ -41,7 +42,7 @@ export class BuscadorComponent implements OnInit {
 
   buscar() {
     this.universidad = this.universidadPorPais.filter(
-      lista => lista.name.includes(this.value));
+      lista => lista.name.toUpperCase().includes(this.value.toUpperCase()));
   }
   
 }
