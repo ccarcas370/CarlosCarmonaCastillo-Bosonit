@@ -1,10 +1,15 @@
 
 <div class="row">
-  <ul class="semaforo"
-      custom-color>
-    <li custom-color></li>
-    <li custom-color></li>
-    <li custom-color></li>
+  <ul class="semaforo">
+    <li custom-color 
+        [color]="colorRecibido"
+        class="rojo"></li>
+    <li custom-color 
+        [color]="colorRecibido"
+        class="amarillo"></li>
+    <li custom-color 
+        [color]="colorRecibido"
+        class="verde"></li>
   </ul>
   
   <div class="contenedor m-3">
@@ -13,6 +18,7 @@
     </div>
     
     <div class="mx-3">
+      <br><br>
       <app-checkbox-component></app-checkbox-component>
     </div>
   </div>

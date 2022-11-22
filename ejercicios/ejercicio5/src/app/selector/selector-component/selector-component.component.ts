@@ -9,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/co
 export class SelectorComponentComponent implements OnInit {
 
   @Output() colorEnviado = new EventEmitter<string>();
-  color: string = '';
+  color: string = 'rojo';
   colorSeleccionado: string  = 'Seleccione una opción';
 
   constructor() { }

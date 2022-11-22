@@ -19,14 +19,27 @@ ul.semaforo li {
 }
 
 ul.semaforo li.rojo {
-    background-color: red;
+    background-color: lightgrey;
 }
 
 ul.semaforo li.amarillo {
-    background-color: yellow;
+    background-color: lightgrey;
 }
 
 ul.semaforo li.verde {
+    background-color: lightgrey;
+}
+
+
+ul.semaforo li.rojo2 {
+    background-color: red;
+}
+
+ul.semaforo li.amarillo2 {
+    background-color: yellow;
+}
+
+ul.semaforo li.verde2 {
     background-color: green;
 }
 

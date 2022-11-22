@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectorComponentComponent } from './selector-component/selector-component.component';
-import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 
 
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    MatSelectModule,
     FormsModule
   ]
 })

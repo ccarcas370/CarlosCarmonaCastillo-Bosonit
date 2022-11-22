@@ -1,1 +1,17 @@
-<p>checkbox-component works!</p>
+
+<div class="form-check">
+  <form>
+  <input class="form-check-input" type="checkbox" id="onOff" (change)="cambiarValor()">
+  <label class="form-check-label" 
+        for="onOff"
+        *ngIf="cambiarValor()">
+        <b> {{ mensaje1 }} </b> {{ mensaje2 }}
+    </label>
+    <label class="form-check-label" 
+          for="onOff"
+          *ngIf="!cambiarValor()">
+          {{ mensaje1 }} <b> {{ mensaje2 }} </b>
+    </label>
+  </form>
+</div>
+
